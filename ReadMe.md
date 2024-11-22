@@ -4,8 +4,6 @@
 - config written in Lua
 - setup for macOs (still working on optimized version)
 
----
-
 ## Setup
 
 located in
@@ -14,15 +12,18 @@ located in
 ~/.config/nvim/init.lua
 ```
 
----
-
-### MacOs adjustments for enabling true color support:
+### MacOs adjustments:
 
 1. Adjust `~/.zshrc` environment variables:
 
 ```bash
-$TERM = xterm-256color
-$COLORTERM = truecolor
+# enabling true color support
+export TERM = xterm-256color  # call with 'echo $TERM'
+export COLORTERM = truecolor
+
+# enabling nerd font 
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF8
 ```
 
 then run
@@ -51,4 +52,4 @@ tmux source-file ~/.tmux.conf
 
 ---
 
-**Run nvim in `tmux` session (when using truecolor colorscheme)**
+**Run nvim in `tmux` session (when using truecolor theme)**

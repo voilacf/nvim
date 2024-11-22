@@ -31,7 +31,23 @@ local plugins = {
   -- fuzzy finding and grep functionality
   {"nvim-telescope/telescope.nvim", tag = "0.1.5",
     dependencies = {"nvim-lua/plenary.nvim"}
-  }
+  },
+  -- to see project structure in editor 
+  {"nvim-tree/nvim-tree.lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" }, -- optional for icons
+    config = function()
+      require("nvim-tree").setup({
+        -- Your nvim-tree configuration here
+        update_focused_file = {
+          enable = true,
+          update_cwd = true,
+        },
+        view = {
+          width = 30,
+        },
+      })
+    end,
+  },
 }
 
 local opts = {}
@@ -42,6 +58,7 @@ require("lazy").setup(plugins, opts)
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", builtin.find_files, {})
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+vim.api.nvim_set_keymap('n', '<C-b>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
 -- color theme 
 vim.o.termguicolors = true
