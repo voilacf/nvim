@@ -2,7 +2,7 @@
 
 - lazy used as package manager
 - config written in Lua
-- setup for macOs (still working on optimized version)
+- setup for macOs (still work in progress)
 
 ## Setup
 
