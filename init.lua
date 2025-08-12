@@ -1,5 +1,11 @@
+-- require("lazy").setup({
+  -- {import = "plugins"}
+-- })
+-- using spaces instead of tabs as tabs
 vim.cmd("set expandtab")
+-- tab with = 2 spaces
 vim.cmd("set tabstop=2")
+-- 
 vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.g.mapleader = " "
@@ -11,7 +17,7 @@ if not vim.loop.fs_stat(lazypath) then
 		"git",
 		"clone",
 		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
+
 		"--branch=stable", -- latest stable release
 		lazypath,
 	})
@@ -25,7 +31,6 @@ local plugins = {
   {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
   -- for line and block commenting 
   {"numToStr/Comment.nvim"},
-  -- {"gruvbox-community/gruvbox", priority = 1000},
   {"catppuccin/nvim", name = "catppuccin", priority = 1000},
   -- {"shaunsingh/nord.nvim", priority = 1000, lazy = false},
   -- fuzzy finding and grep functionality
@@ -62,9 +67,9 @@ vim.api.nvim_set_keymap('n', '<C-b>', ':NvimTreeToggle<CR>', { noremap = true, s
 
 -- color theme 
 vim.o.termguicolors = true
--- vim.o.background = "dark"
 vim.g.catppuccin_flavour = "mocha"
 vim.g.catppuccin_custom_colors = true
+
 require("catppuccin").setup({
   transparent_background = false,
   term_colors = true,
@@ -76,9 +81,11 @@ require("catppuccin").setup({
     variables = {},
   },
 })
+
 -- vim.g.nord_contrast = false
 -- vim.g.nord_borders = false
 -- vim.g.nord_disable_background = false
+
 vim.cmd("colorscheme catppuccin")
 vim.api.nvim_set_hl(0, "Conditional", { fg = "#d1b0fa" }) -- Example for 'if'
 -- vim.api.nvim_set_hl(0, "Keyword", { fg = "#81a1c1", italic = true })   -- Example for 'then' and 'end'
@@ -122,3 +129,11 @@ vim.wo.foldenable = false
 -- numbers on the side
 vim.o.number = true
 vim.o.relativenumber = false
+
+-- for copy paste
+vim.opt.clipboard = 'unnamedplus'
+
+-- key mapping for commenting
+vim.keymap.set("n", "<C-7>", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>")
+vim.keymap.set("n", "<C-S-7>", "<cmd>lua require('Comment.api').toggle.blockwise.current()<CR>")
+
